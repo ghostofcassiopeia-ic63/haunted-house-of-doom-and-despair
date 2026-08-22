@@ -16,7 +16,11 @@ function drawSprite (context, sprite, x, y, scale) {
 }
 
 function drawTile (context, tile, x, y, scale) {
-    context.drawImage(tile, x * 20 * scale, y * 20 * scale, tile.width * scale, tile.height * scale);
+    context.drawImage(tile, x * 32 * scale, y * 32 * scale, tile.width * scale, tile.height * scale);
+}
+
+function drawBackground (context, bg, scale) {
+    context.drawImage(bg, 0, 0, 320 * scale, 240 * scale);
 }
 
 // Loaded Sprites
@@ -48,6 +52,8 @@ let spr_paper_0  = document.getElementById("spr_paper_0");
 let spr_paper_1  = document.getElementById("spr_paper_1");
 let spr_desk  = document.getElementById("spr_desk");
 
+let spr_backgrounda = document.getElementById("spr_backgrounda");
+
 // Game Setup
 
 clear(ctx, "#bfbfff");
@@ -59,7 +65,15 @@ let player = {
     x: 0,
     y: 0
 }
+
+let blacklight = {
+    texture: spr_blacklight,
+    x: 224,
+    y: 208
+}
+
 gameObjects.push(player);
+gameObjects.push(blacklight);
 
 let stepSize = 4;
 
@@ -105,10 +119,10 @@ document.body.addEventListener("keyup", function (e) {
 });
 
 window.setInterval(function () {
+    clear(ctx, "#bfbfff");
+    drawBackground(ctx, spr_backgrounda, 2);
+    drawTile(ctx, spr_desk, 3, 3, 2);
     for (let obj of gameObjects) {
-        clear(ctx, "#bfbfff");
         drawSprite(ctx, obj.texture, obj.x, obj.y, 2);
-        drawTile(ctx, spr_desk, 5, 5, 2);
-        console.log("drawn");
     }
 }, 50);
