@@ -1,5 +1,11 @@
 // Canvas Setup
-
+let inventory = [  ]
+function additem (item) {
+    inventory.push(item);
+}
+function removeitem (item) {
+    inventory.pop(item);
+}
 let canvas = document.getElementById("game_window");
 let ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false;
