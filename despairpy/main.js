@@ -76,7 +76,17 @@ document.body.addEventListener("keydown", function (e) {
 });
 
 document.body.addEventListener("keyup", function (e) {
-    gameObjects[0].texture = document.getElementById("spr_little_guy_walk_left_0");
+    
+    switch (e.key) {
+        case 'ArrowLeft': {
+            gameObjects[0].texture = walkAnimationLeft[0];
+        };
+        break;
+        case 'ArrowRight': {
+            gameObjects[0].texture = walkAnimationRight[0];
+        };
+        break;
+    }
     stepsLeft = 0;
     stepsRight = 0;
 });
