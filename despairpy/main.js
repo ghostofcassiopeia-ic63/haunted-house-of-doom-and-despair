@@ -15,16 +15,8 @@ function drawSprite (context, sprite, x, y, scale) {
     context.drawImage(sprite, x, y, sprite.width * scale, sprite.height * scale);
 }
 
-// Game Setup
-
-clear(ctx, "#bfbfff");
-
-let gameObjects = [];
-
-let player = {
-    texture: document.getElementById("spr_little_guy_walk_left_0"),
-    x: 0,
-    y: 0
+function drawTile (context, tile, x, y, scale) {
+    context.drawImage(tile, x * 20 * scale, y * 20 * scale, tile.width * scale, tile.height * scale);
 }
 
 // Loaded Sprites
@@ -45,6 +37,28 @@ let spr_little_guy_walk_right_3 = document.getElementById("spr_little_guy_walk_r
 let walkAnimationRight = [spr_little_guy_walk_right_0, spr_little_guy_walk_right_1, spr_little_guy_walk_right_2, spr_little_guy_walk_right_3];
 let stepsRight = 0;
 
+let spr_floor = document.getElementById("spr_floor");
+let spr_wall = document.getElementById("spr_wall");
+
+let spr_blacklight = document.getElementById("spr_blacklight");
+let spr_dresser = document.getElementById("spr_dresser");
+let spr_closet = document.getElementById("spr_closet");
+let spr_key  = document.getElementById("spr_key");
+let spr_paper_0  = document.getElementById("spr_paper_0");
+let spr_paper_1  = document.getElementById("spr_paper_1");
+let spr_desk  = document.getElementById("spr_desk");
+
+// Game Setup
+
+clear(ctx, "#bfbfff");
+
+let gameObjects = [];
+
+let player = {
+    texture: document.getElementById("spr_little_guy_walk_left_0"),
+    x: 0,
+    y: 0
+}
 gameObjects.push(player);
 
 let stepSize = 4;
@@ -76,7 +90,6 @@ document.body.addEventListener("keydown", function (e) {
 });
 
 document.body.addEventListener("keyup", function (e) {
-    
     switch (e.key) {
         case 'ArrowLeft': {
             gameObjects[0].texture = walkAnimationLeft[0];
@@ -95,6 +108,7 @@ window.setInterval(function () {
     for (let obj of gameObjects) {
         clear(ctx, "#bfbfff");
         drawSprite(ctx, obj.texture, obj.x, obj.y, 2);
+        drawTile(ctx, spr_desk, 5, 5, 2);
         console.log("drawn");
     }
 }, 50);
